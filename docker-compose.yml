@@ -1,0 +1,27 @@
+version: "3.2"
+services:
+
+  receiver:
+    container_name: receiver-cont
+    build: ./receiver
+    image: receiver-img
+    # restart: always
+    # environment:
+    #   - DATABASE_NAME=${DATABASE_NAME}
+    #   - POSTGRES_PORT=5432
+
+    # ports:
+    #   - 50001:50000
+
+  sender:
+    container_name: sender-cont
+    build: ./sender
+    image: sender-img
+    # restart: always
+    # environment:
+    #   - DATABASE_NAME=${DATABASE_NAME}
+    #   - POSTGRES_PORT=5432
+
+    # ports:
+    #   - 50000:50000
+
