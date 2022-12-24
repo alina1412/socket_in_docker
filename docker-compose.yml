@@ -1,10 +1,10 @@
 version: "3.2"
 services:
 
-  receiver:
-    container_name: receiver-cont
-    build: ./receiver
-    image: receiver-img
+  server:
+    container_name: server-cont
+    build: ./server
+    image: server-img
     # restart: always
     # environment:
     #   - DATABASE_NAME=${DATABASE_NAME}
@@ -13,10 +13,10 @@ services:
     # ports:
     #   - 50001:50000
 
-  sender:
-    container_name: sender-cont
-    build: ./sender
-    image: sender-img
+  client:
+    container_name: client-cont
+    build: ./client
+    image: client-img
     # restart: always
     # environment:
     #   - DATABASE_NAME=${DATABASE_NAME}
@@ -24,4 +24,6 @@ services:
 
     # ports:
     #   - 50000:50000
+    depends_on:
+      - server
 
