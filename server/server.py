@@ -1,3 +1,4 @@
+import json
 import socket
 
 import threading
@@ -33,6 +34,19 @@ def get_msg_len_from_header(client_conn):
     return 0
 
 
+def prepare_answer(msg):
+    data = json.loads(msg)
+    password = data.get("password", "")
+    if len(password) < 4:
+        return json.dumps(
+            {
+                "acknowleged": False,
+                "error": "the length of the password shall be >= 4",
+            }
+        )
+    return json.dumps({"acknowleged": True})
+
+
 def handle_client(client_conn, client_addr):
     try:
         connected = True
@@ -43,7 +57,7 @@ def handle_client(client_conn, client_addr):
                 connected = False
 
             print(f"[{client_addr}] {message}")
-            ans = f"received: {message}"
+            ans = prepare_answer(message)
             client_conn.send(ans.encode("utf-8"))
     except Exception as exc:
         print("error", exc)

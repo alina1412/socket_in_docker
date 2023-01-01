@@ -5,4 +5,4 @@ RUN mkdir server
 
 COPY . ./server/
 
-CMD ["python", "server/server.py"]
+CMD ["python", "-u", "server/server.py"]
